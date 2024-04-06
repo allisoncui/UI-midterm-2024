@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<body>
+    <div class="container">
+        <h2 class="caption">Add New Place</h2>
+        <div id="successMessage" class="viewnew">
+        </div>
+        <form id="addPlaceForm">
+            <div class="form-group mb-3">
+                <label for="hotel">Hotel Name</label>
+                <input type="text" class="form-control" id="hotel" name="hotel" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="location">Location</label>
+                <input type="text" class="form-control" id="location" name="location" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+            </div>
+            <div class="form-group mb-3">
+                <label for="avg_nightly">Average Nightly Rate ($)</label>
+                <input type="number" class="form-control" id="avg_nightly" name="avg_nightly" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="amenities">Amenities (comma-separated)</label>
+                <input type="text" class="form-control" id="amenities" name="amenities" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="nearby_attractions">Nearby Attractions (comma-separated)</label>
+                <input type="text" class="form-control" id="nearby_attractions" name="nearby_attractions" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="transportation">Transportation Options (comma-separated)</label>
+                <input type="text" class="form-control" id="transportation" name="transportation" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="avg_rating">Average Rating (1-5)</label>
+                <input type="number" class="form-control" id="avg_rating" name="avg_rating" required min="1" max="5"
+                    step="0.1">
+            </div>
+            <div class="form-group mb-3">
+                <label for="reviews">Number of Reviews</label>
+                <input type="number" class="form-control" id="reviews" name="reviews" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="image">Image URL</label>
+                <input type="text" class="form-control" id="image" name="image" required>
+            </div>
+            <button type="submit" class="btn btn-add" id="submit-place">Submit</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#addPlaceForm").click(function (event) {
+            event.preventDefault();
+
+            let new_place = {
+                hotel: $("#hotel").val(),
+                location: $("#location").val(),
+                description: $("#description").val(),
+                avg_nightly: $("#avg_nightly").val(),
+                amenities: $("#amenities").val(),
+                nearby_attractions: $("#nearby_attractions").val(),
+                transportation: $("#transportation").val(),
+                avg_rating: $("#avg_rating").val(),
+                reviews: $("#reviews").val(),
+                image: $("#image").val()
+            };
+            add_place(new_place);
+        });
+    });
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<script>
+    let places = {{ places| tojson}}
+    console.log(places)
+</script>
+
+<div class="container">
+    <div class="heading-container">
+        <h2 class="popular-heading">Spring Into Fun With Top Getaways for Your Break!</h2>
+        <img src="../static/images/flower.png" alt="flower icon" class="icon">
+    </div>
+    <div class="caption">Are you on a budget and looking for a relaxing spot to have some fun over spring
+        break? Check out these popular destinations below! Use the search bar to find other potential places.</div>
+    <div class="popular-container">
+        <div class="row" id="popular-places">
+            <!-- Content for popular places -->
+        </div>
+    </div>
+</div>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById('search-form').addEventListener('submit', function (event) {
+        var searchInput = document.getElementById('search-input');
+        if (!searchInput.value.trim()) {
+            event.preventDefault();
+            searchInput.value = '';
+            searchInput.focus();
+        }
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="mb-4 caption">Edit Place</h2>
+    <form id="editPlaceForm" action="/update/{{ place['id'] }}" method="POST">
+        <div class="mb-3">
+            <label for="hotel" class="form-label">Hotel Name</label>
+            <input type="text" class="form-control" id="hotel" name="hotel" value="{{ place['hotel'] }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" class="form-control" id="location" name="location" value="{{ place['location'] }}"
+                required>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3"
+                required>{{ place['description'] }}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="avg_nightly" class="form-label">Average Nightly Rate ($)</label>
+            <input type="number" class="form-control" id="avg_nightly" name="avg_nightly"
+                value="{{ place['avg_nightly'] }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="amenities" class="form-label">Amenities (comma-separated)</label>
+            <input type="text" class="form-control" id="amenities" name="amenities"
+                value="{{ place['amenities']|join(',') }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="nearby_attractions" class="form-label">Nearby Attractions (comma-separated)</label>
+            <input type="text" class="form-control" id="nearby_attractions" name="nearby_attractions"
+                value="{{ place['nearby_attractions']|join(',') }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="transportation" class="form-label">Transportation Options (comma-separated)</label>
+            <input type="text" class="form-control" id="transportation" name="transportation"
+                value="{{ place['transportation']|join(',') }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="avg_rating" class="form-label">Average Rating</label>
+            <input type="number" class="form-control" id="avg_rating" name="avg_rating"
+                value="{{ place['avg_rating'] }}" step="0.1" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="reviews" class="form-label">Number of Reviews</label>
+            <input type="number" class="form-control" id="reviews" name="reviews" value="{{ place['reviews'] }}"
+                required>
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">Image URL</label>
+            <input type="text" class="form-control" id="image" name="image" value="{{ place['image'] }}" required>
+        </div>
+
+        <span><button type="submit" class="btn btn-add">Submit</button>
+            <a href="{{ url_for('place', id=place['id']) }}" class="btn btn-add">Discard Changes</a></span>
+    </form>
+</div>
+
+<script>
+    document.querySelector('.btn-warning').addEventListener('click', function (e) {
+        e.preventDefault();
+        var confirmed = confirm('Are you sure you want to discard your changes?');
+        if (confirmed) {
+            window.location.href = this.href; // Redirect back to view/<id> page
+        }
+    });
+
+</script>
+{% endblock %}

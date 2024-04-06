@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container mb-5">
+    <div class="row">
+        <div class="col-md-12 p-fontsize">
+            <h2 class="my-3">{{ place.hotel }}</h2>
+            <div class="col-md-6 my-3">
+                <img src="{{ place.image }}" class="img-fluid" alt="{{ place.name }}">
+            </div>
+            <a href="{{ url_for('edit', id=place['id']) }}" class="btn btn-secondary mt-2 mb-2">Edit</a>
+            <p><strong>Rating:</strong> {{ place.rating }} ({{ place.reviews }} reviews)</p>
+            <p><strong>Location:</strong> {{ place.location }}</p>
+            <p><strong>Description:</strong> {{ place.description }}</p>
+            <p><strong>Average Nightly Rate:</strong> {{ place.avg_nightly }}</p>
+            <p><strong>Nearby Attractions:</strong>
+            <ul>
+                {% for attraction in place.nearby_attractions %}
+                <li>{{ attraction }}</li>
+                {% endfor %}
+            </ul>
+            </p>
+            <p><strong>Amenities:</strong>
+            <ul>
+                {% for amenity in place.amenities %}
+                <li>{{ amenity }}</li>
+                {% endfor %}
+            </ul>
+            </p>
+            <p><strong>Transportation Methods:</strong>
+            <ul>
+                {% for transportation in place.transportation %}
+                <li>{{ transportation }}</li>
+                {% endfor %}
+            </ul>
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

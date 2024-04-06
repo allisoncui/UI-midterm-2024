@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h2 class="popular-heading">Search Results for "{{ query }}"</h2>
+    {% if places %}
+    <p class="caption">Showing {{ places|length }} result(s)</p>
+    <div class="row">
+        {% for place in places %}
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{{ place.image }}" class="card-img-top" alt="{{ place.hotel }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ place.hotel |safe}}</h5>
+                    <p class="card-text">{{ place.location |safe}}</p>
+                    <p class="card-text">{{ place.description |safe}}</p>
+                    <a href="{{ url_for('place', id=place.id) }}" class="btn btn-view">View Place</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="no-results">No results found</p>
+    {% endif %}
+</div>
+
+{% endblock %}
