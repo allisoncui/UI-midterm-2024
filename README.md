@@ -1,10 +1,10 @@
 # User Interface Design Midterm Project - Spring 2024
 
-Welcome to the repository for my Midterm Project for the User Interface Design course, Spring 2024. This project showcases my understanding and skills in creating user-friendly interfaces.
+This is the repository for my User Interface Design midterm project. This full-stack Flask web application showcases my understanding and skills in using Python to create user-friendly interfaces.
 
 ## Overview
 
-This project is a web application designed to demonstrate various UI design principles. For a brief overview and demonstration of the project, please check out the [UI midterm video](https://youtu.be/9sw9JWB85Yo).
+For a brief overview and demonstration of the project, please check out the [UI midterm video](https://youtu.be/9sw9JWB85Yo).
 
 ## Installation
 
