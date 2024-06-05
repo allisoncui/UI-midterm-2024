@@ -10,7 +10,7 @@
                 <img src="{{ place.image }}" class="img-fluid" alt="{{ place.name }}">
             </div>
             <a href="{{ url_for('edit', id=place['id']) }}" class="btn btn-secondary mt-2 mb-2">Edit</a>
-            <p><strong>Rating:</strong> {{ place.rating }} ({{ place.reviews }} reviews)</p>
+            <p><strong>Rating:</strong> {{ place.avg_rating }} ({{ place.reviews }} reviews)</p>
             <p><strong>Location:</strong> {{ place.location }}</p>
             <p><strong>Description:</strong> {{ place.description }}</p>
             <p><strong>Average Nightly Rate:</strong> {{ place.avg_nightly }}</p>
