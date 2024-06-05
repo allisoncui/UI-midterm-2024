@@ -1,23 +1,25 @@
-const popularPlacesIds = ['2', '6', '10'];
+const popularPlacesIds = ['2', '6', '10'];  // contains the ids of the popular places to highlight
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    fetch('/api/places')
-        .then(response => response.json())
+document.addEventListener('DOMContentLoaded', () => {  // event listener waits for the DOM to fully load before executing the callback function
+    fetch('/api/places')                               // makes a get request to endpoint to retrieve a list of places
+        .then(response => response.json())             // converts to json
         .then(data => {
-            const popularPlaces = data.filter(place => popularPlacesIds.includes(place.id.toString()));
-            updatePopularPlaces(popularPlaces);
+            const popularPlaces = data.filter(place => popularPlacesIds.includes(place.id.toString()));   // filters retrieved places to get popular place IDs
+
+            updatePopularPlaces(popularPlaces);   // calls updatePopularPlaces function below with the filtered popular places
         })
         .catch(error => console.error('Error fetching places:', error));
 });
 
+// updates DOM with the popular places
 function updatePopularPlaces(popularPlaces) {
-    const popularPlacesDiv = document.getElementById('popular-places');
+    const popularPlacesDiv = document.getElementById('popular-places');      // selects the HTML element where the popular places will be displayed
 
-    popularPlacesDiv.innerHTML = '';
+    popularPlacesDiv.innerHTML = '';                                         // clears any existing content in the popular places container
 
-    popularPlaces.forEach(place => {
-        const placeElement = document.createElement('div');
+    popularPlaces.forEach(place => {                                         // iterates thru all popular places
+        const placeElement = document.createElement('div');                  // creates a new div element for each place
         placeElement.className = 'col-md-4';
         placeElement.innerHTML = `
             <div class="card" style="width: 25rem;">
@@ -32,12 +34,13 @@ function updatePopularPlaces(popularPlaces) {
                 </div>
             </div>
         `;
-        popularPlacesDiv.appendChild(placeElement);
+        popularPlacesDiv.appendChild(placeElement);                          // appends the new div element to the popular places container
     });
 }
 
-
+// validates the input fields and sends a POST request to add a new place
 function add_place(new_place) {
+    //  extract values from the new_place object
     let hotel = new_place["hotel"]
     let location = new_place["location"]
     let description = new_place["description"]
@@ -50,6 +53,7 @@ function add_place(new_place) {
     let image = new_place["image"]
     $(".warning").remove();
 
+    // validates all input fields + displays warning messages if any fields are empty/invalid
     let valid = true;
     if (!hotel) {
         $("<span class='warning text-danger'>Enter hotel name.</span>").insertAfter("#hotel");
@@ -117,12 +121,13 @@ function add_place(new_place) {
         valid = false;
     }
 
+    // if all fields are valid, it constructs the data_to_save object with the new place's details
     if (valid) {
         let data_to_save = {
             "hotel": hotel, "location": location, "description": description, "avg_nightly": avg_nightly, "amenities": amenities, "nearby_attractions": nearby_attractions, "transportation": transportation,
             "avg_rating": avg_rating, "reviews": reviews, "image": image
         }
-        $.ajax({
+        $.ajax({                             // sends ajax post request to the '/add' endpoint with the new place data
             type: "POST",
             url: "/add",
             contentType: "application/json; charset=utf-8",
